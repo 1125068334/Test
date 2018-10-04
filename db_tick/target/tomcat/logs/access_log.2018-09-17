@@ -1,0 +1,3 @@
+0:0:0:0:0:0:0:1 - - [17/Sep/2018:23:03:29 +0800] "GET /tick HTTP/1.1" 404 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [17/Sep/2018:23:07:41 +0800] "GET /tick HTTP/1.1" 404 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [17/Sep/2018:23:08:12 +0800] "GET /tick/unauthorized.jsp HTTP/1.1" 404 - http-bio-8080-exec-4 0

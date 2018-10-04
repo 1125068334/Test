@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.CheckMapper">
+  <resultMap id="checkMap" type="com.fjl.entity.Check">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="startname" jdbcType="VARCHAR" property="startname" />
+    <result column="startno" jdbcType="VARCHAR" property="startno" />
+    <result column="startdate" jdbcType="DATE" property="startdate" />
+    <result column="enddate" jdbcType="DATE" property="enddate" />
+    <result column="days" jdbcType="INTEGER" property="days" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <select id="findAllCheck" resultType="check">
+  		select * from t_check
+  </select>
+  <insert id="addCheck" parameterType="com.fjl.entity.Check">
+    insert into t_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="startname != null">
+        startname,
+      </if>
+      <if test="startno != null">
+        startno,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="days != null">
+        days,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startname != null">
+        #{startname,jdbcType=VARCHAR},
+      </if>
+      <if test="startno != null">
+        #{startno,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="days != null">
+        #{days,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="count" resultType="long">
+  	select count(1) from t_check
+  </select>
+  
+  
+  
+  
+</mapper>

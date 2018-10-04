@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.StaffMapper">
+  <resultMap id="staMap" type="com.fjl.entity.Staff">
+    <id column="no" jdbcType="VARCHAR" property="no" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="did" jdbcType="INTEGER" property="did" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+  </resultMap>
+  <select id="count" resultType="long">
+  		select count(1) from t_staff
+  </select>
+  <select id="findAllStaff" resultType="map">
+  		select st.*,d.name as dname from t_staff st
+  		inner join t_depart d
+  		on d.id=st.did
+  </select>
+  <select id="findDepartStaff" parameterType="string" resultType="long">
+  		select count(1) from t_staff st
+  		inner join t_depart d
+  		on st.did=d.id
+  		where d.name=#{name}
+  </select>
+  <select id="staffall" resultType="staff">
+  		select * from t_staff
+  </select>
+  <select id="findByNo" parameterType="string" resultType="staff">
+  		select * from t_staff where no=#{no}
+  </select>
+  <select id="findByName" parameterType="string">
+  		select * from t_staff where name=#{no}
+  </select>
+   <insert id="addStaff" parameterType="map">
+    insert into t_staff
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="did != null">
+        did,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="no != null">
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null">
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateStaff" parameterType="com.fjl.entity.Staff">
+    update t_staff
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null">
+        did = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where no = #{no,jdbcType=VARCHAR}
+  </update>
+  <delete id="delete" parameterType="string">
+  		delete from t_staff where no=#{no}
+  </delete>
+</mapper>

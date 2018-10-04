@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.AuthorityMapper">
+  <resultMap id="auMap" type="com.fjl.entity.Authority">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="aicon" jdbcType="VARCHAR" property="aicon" />
+    <result column="aurl" jdbcType="VARCHAR" property="aurl" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+ 
+  
+  <select id="findByName" parameterType="string"
+		resultMap="auMap">
+		select distinct au.* from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.name=#{name}
+	</select>
+	
+  <select id="findAuByNo" parameterType="map"
+		resultMap="auMap">
+		select distinct au.* from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.no=#{no}
+	</select>
+  <select id="findAuByNo1" parameterType="string"
+		resultMap="auMap">
+		select distinct au.* from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.no=#{name}
+	</select>
+  <select id="countAu" parameterType="map"
+		resultType="long">
+		select count(*) from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.no=#{name}
+	</select>
+	
+  <select id="findByParentid" parameterType="int"
+		resultMap="auMap">
+		select distinct au.* from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where au.parentid=#{id}
+	</select>
+	
+  <select id="findByParentid1" parameterType="int"
+		resultMap="auMap">
+		select distinct au.* from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where au.parentid=#{id}
+	</select>
+	
+  <select id="findTitleByParentid" parameterType="int"
+		resultType="string">
+		select distinct au.title from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.parentid=#{id}
+	</select>
+	
+  <select id="findIdByParentid" parameterType="int"
+		resultType="int">
+		select distinct au.id from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where au.parentid=#{id}
+	</select>
+	
+	<!-- 根据用户名获取角色信息的信息列表 -->
+	<select id="findRoleByName" parameterType="string" resultType="string">
+		select distinct r.name from t_user u
+		inner join t_userrole ur 
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		where u.name=#{name}
+	</select>
+	
+	
+	<!-- 根据用户名获取角色信息的权限-->
+	<select id="findTitleByName" parameterType="string" resultType="string">
+		select distinct au.title from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where u.name=#{name}
+	</select>
+  
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.LoginLogMapper">
+  <resultMap id="loginLogMap" type="com.fjl.entity.LoginLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="no" jdbcType="VARCHAR" property="no" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+  </resultMap>
+  <select id="findAllLogByNo" parameterType="string" resultType="LoginLog">
+  		select * from t_loginlog where no=#{no} order by id desc
+  </select>
+  
+  <insert id="addLog" parameterType="LoginLog">
+  		insert into t_loginlog(id,no,ip,location,createtime) values(#{id},#{no},#{ip},#{location},#{createtime});
+  </insert>
+</mapper>

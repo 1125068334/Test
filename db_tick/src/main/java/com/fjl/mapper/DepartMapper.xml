@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.DepartMapper">
+  <resultMap id="departMap" type="com.fjl.entity.Depart">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="Createtime" jdbcType="DATE" property="createtime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <select id="departList" resultType="depart">
+  		select * from t_depart
+  </select>
+  <insert id="add" parameterType="com.fjl.entity.Depart">
+    insert into t_depart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createtime != ''">
+        Createtime,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != ''">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateDepart" parameterType="com.fjl.entity.Depart">
+    update t_depart
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dcount != null">
+        name = #{dcount,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        Createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="count" resultType="long">
+  		select count(1) from t_depart
+  </select>
+  
+</mapper>

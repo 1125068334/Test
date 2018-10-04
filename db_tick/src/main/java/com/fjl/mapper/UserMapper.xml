@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjl.dao.UserMapper">
+	<resultMap id="userMap" type="User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="no" jdbcType="VARCHAR" property="no" />
+		<result column="password" jdbcType="VARCHAR"
+			property="password" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="flag" jdbcType="INTEGER" property="flag" />
+		<result column="headphoto" jdbcType="VARCHAR"
+			property="headphoto" />
+	</resultMap>
+
+	<select id="findByName" parameterType="string"
+		resultMap="userMap">
+		select * from t_user where name=#{name}
+	</select>
+	<select id="findByNo" parameterType="string" resultMap="userMap">
+		select * from t_user where no=#{no}
+	</select>
+
+	<select id="findAll" resultType="map" parameterType="map">
+		select distinct u.id,u.no,u.name,u.flag from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		limit #{page}, #{limit}
+	</select>
+	
+	<select id="countAll" resultType="long">
+		select count(1) from t_user u
+		
+	</select>
+	<select id="countSearch" parameterType="map" resultType="long">
+		select count(1) from t_user u
+		where u.no=#{no} and u.flag=#{flag}
+		order by u.no
+	</select>
+	
+	<select id="searchUR" parameterType="map" resultType="map">
+		select distinct u.id,u.no,u.name,u.flag from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		where u.no=#{no} and u.flag=#{flag}
+		limit #{page},#{limit}
+	</select>
+	<select id="findRoles" resultType="map">
+		select r.id,r.name,r.info from t_role r
+	</select>
+
+	<select id="findRoleByNo" parameterType="string"
+		resultType="map">
+		select r.name, r.info from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on r.id=ur.rid
+		where u.no=#{no}
+	</select>
+
+	<select id="findTitleByNo" parameterType="string"
+		resultMap="userMap">
+		select au.title from t_user u
+		inner join t_userrole ur
+		on u.id=ur.uid
+		inner join t_role r
+		on ur.rid=r.id
+		inner join t_roleauthority rt
+		on r.id=rt.rid
+		inner join t_authority au
+		on rt.aid=au.id
+		where no=#{no}
+	</select>
+
+	<delete id="deleteUserById" parameterType="int">
+		delete from t_user where id=#{id}
+	</delete>
+
+</mapper>

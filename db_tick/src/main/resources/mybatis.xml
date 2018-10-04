@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 配置 懒加载 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	<!-- 设置别名 -->
+	<typeAliases>
+		<!-- <typeAlias type="com.fjl.crud.Person" alias="Person"/> -->
+		<typeAlias type="com.fjl.entity.Address" alias="Address"/>
+		<typeAlias type="com.fjl.entity.Authority" alias="Authority"/>
+		<typeAlias type="com.fjl.entity.Check" alias="Check"/>
+		<typeAlias type="com.fjl.entity.City" alias="City"/>
+		<typeAlias type="com.fjl.entity.Contect" alias="Contect"/>
+		<typeAlias type="com.fjl.entity.Country" alias="Country"/>
+		<typeAlias type="com.fjl.entity.Course" alias="Course"/>
+		<typeAlias type="com.fjl.entity.Depart" alias="Depart"/>
+		<typeAlias type="com.fjl.entity.Grade" alias="Grade"/>
+		<typeAlias type="com.fjl.entity.InterviewQuest" alias="InterviewQuest"/>
+		<typeAlias type="com.fjl.entity.Log" alias="Log"/>
+		<typeAlias type="com.fjl.entity.LoginLog" alias="LoginLog"/>
+		<typeAlias type="com.fjl.entity.Msg" alias="Msg"/>
+		<typeAlias type="com.fjl.entity.Papers" alias="Papers"/>
+		<typeAlias type="com.fjl.entity.Province" alias="Province"/>
+		<typeAlias type="com.fjl.entity.Report" alias="Report"/>
+		<typeAlias type="com.fjl.entity.Role" alias="Role"/>
+		<typeAlias type="com.fjl.entity.RoleAuthorityKey" alias="RoleAuthority"/>
+		<typeAlias type="com.fjl.entity.Schedule" alias="Schedule"/>
+		<typeAlias type="com.fjl.entity.Staff" alias="Staff"/>
+		<typeAlias type="com.fjl.entity.Student" alias="Student"/>
+		<typeAlias type="com.fjl.entity.User" alias="User"/>
+		<typeAlias type="com.fjl.entity.UserRoleKey" alias="UserRole"/>
+		<typeAlias type="com.fjl.entity.Work" alias="Work"/>
+		
+	</typeAliases>
+	
+	
+	
+</configuration> 
