@@ -94,8 +94,8 @@
 						style="background-color: #f39c12 !important; color: white;"><i
 						class="fa fa-users" aria-hidden="true"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">在读班级</span> <span
-							class="info-box-number" id="s4"></span>
+						<span class="info-box-text">在读班级</span> 
+						<span class="info-box-number" id="s4"></span>
 					</div>
 				</div>
 			</div>
@@ -144,6 +144,22 @@
 			  
 		});
 	</script>
+	<script>
+	$(function(){
+		$.ajax({
+			type:"get",
+			url:"findAllUser",
+			dataType:"json",
+			success:function(data){
+				var info = data.msg;
+				$(info).each(function(){
+					var html = "<a href = ''>" + this.name + "</a>";
+					$("#s3").append($(html));
+				})
+			}
+		})
+	})
+</script>
 </body>
 
 </html>

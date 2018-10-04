@@ -152,7 +152,7 @@ public class StaffController {
 	}
 	
 	
-	@RequestMapping("staffdelete")
+	@RequestMapping("/staffdelete")
 	@ResponseBody
 	public JsonBean delete(String no) {
 		JsonBean bean = new JsonBean();
@@ -166,6 +166,24 @@ public class StaffController {
 			bean.setMsg(e.getMessage());
 		}
 		
+		return bean;
+	}
+	
+	@RequestMapping("/countStaff")
+	@ResponseBody
+	public JsonBean countStaff() {
+		JsonBean bean = new JsonBean();
+		long  count = 0;
+		try {
+			count = staffService.count();
+			bean.setData(count);
+			bean.setCode(1);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			bean.setMsg(e.getMessage());
+		}
 		return bean;
 	}
 	
